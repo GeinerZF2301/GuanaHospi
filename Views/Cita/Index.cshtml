@@ -1,0 +1,66 @@
+﻿@model IEnumerable<GuanaHospi.Models.Cita>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaSalida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPacienteNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSecretariaNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSalida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Apellido1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Apellido1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSecretariaNavigation.Apellido1)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCita">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCita">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCita">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
