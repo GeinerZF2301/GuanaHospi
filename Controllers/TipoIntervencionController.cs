@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace GuanaHospi.Controllers
 {
@@ -63,10 +65,14 @@ namespace GuanaHospi.Controllers
                 SqlCommand cmd = conn.CreateCommand();
                 conn.Open();
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "sp_IngresarGenero";
-                cmd.Parameters.Add("@NombreTipo", System.Data.SqlDbType.VarChar, 30).Value = tipoIntervencion.NombreTipo + "Insercion_SP";
+                cmd.CommandText = "SP_InsertarTipoIntervencion";
+                cmd.Parameters.Add("@NombreTipo", System.Data.SqlDbType.VarChar, 20).Value = tipoIntervencion.NombreTipo;
+
                 await cmd.ExecuteNonQueryAsync();
                 conn.Close();
+               
+                //_context.Add(tipoIntervencion);
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(tipoIntervencion);
@@ -104,8 +110,17 @@ namespace GuanaHospi.Controllers
             {
                 try
                 {
-                    _context.Update(tipoIntervencion);
-                    await _context.SaveChangesAsync();
+                    SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                    SqlCommand cmd = conn.CreateCommand();
+                    conn.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_Actualizar_TipoIntervencion";
+                    cmd.Parameters.Add("@Id_TipoIntervencion", System.Data.SqlDbType.Int).Value = tipoIntervencion.IdTipoIntervencion;
+                    cmd.Parameters.Add("@NombreTipo", System.Data.SqlDbType.VarChar, 20).Value = tipoIntervencion.NombreTipo;
+                    await cmd.ExecuteNonQueryAsync();
+                    conn.Close();
+                    //_context.Update(tipoIntervencion);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -146,9 +161,17 @@ namespace GuanaHospi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoIntervencion = await _context.TipoIntervenciones.FindAsync(id);
-            _context.TipoIntervenciones.Remove(tipoIntervencion);
-            await _context.SaveChangesAsync();
+            SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+            SqlCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "SP_EliminarTipoIntervencion";
+            cmd.Parameters.Add("@Id_TipoIntervencion", System.Data.SqlDbType.Int).Value = id;
+            await cmd.ExecuteNonQueryAsync();
+            conn.Close();
+            //var tipoIntervencion = await _context.TipoIntervenciones.FindAsync(id);
+            //_context.TipoIntervenciones.Remove(tipoIntervencion);
+            //await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

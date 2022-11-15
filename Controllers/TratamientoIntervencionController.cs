@@ -50,7 +50,7 @@ namespace GuanaHospi.Controllers
         // GET: TratamientoIntervencion/Create
         public IActionResult Create()
         {
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion");
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion");
             ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion");
             return View();
         }
@@ -75,7 +75,7 @@ namespace GuanaHospi.Controllers
                 conn.Close();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion", tratamientoIntervencion.IdIntervencion);
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion", tratamientoIntervencion.IdIntervencion);
             ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion", tratamientoIntervencion.IdTratamiento);
             return View(tratamientoIntervencion);
         }
@@ -93,7 +93,7 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion", tratamientoIntervencion.IdIntervencion);
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion", tratamientoIntervencion.IdIntervencion);
             ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion", tratamientoIntervencion.IdTratamiento);
             return View(tratamientoIntervencion);
         }
@@ -138,7 +138,7 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion", tratamientoIntervencion.IdIntervencion);
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion", tratamientoIntervencion.IdIntervencion);
             ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion", tratamientoIntervencion.IdTratamiento);
             return View(tratamientoIntervencion);
         }

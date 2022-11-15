@@ -1,123 +1,112 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GuanaHospi</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración GuanaHospi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link href="~/css/prueba.css" rel="stylesheet" />
+
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/fontawesome-all.min.css" rel="stylesheet" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GuanaHospi</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoEnfermedad" asp-action="index">TipoEnfermedad</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="EnfermedadSintoma" asp-action="index">EnfermedadSintoma</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="EnfermedadTipo" asp-action="index">EnfermedadTipo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Enfermedad" asp-action="index">Enfermedad</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="EnfermedadPaciente" asp-action="index">EnfermedadPaciente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Citum" asp-action="index">Citum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="index">Doctor</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DoctorEspecialidad" asp-action="index">DoctorEspecialidad</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DoctorTratamiento" asp-action="index">DoctorTratamiento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Especialidad" asp-action="index">Especialidad</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Intervencion" asp-action="index">Intervencion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="IntervencionTipo" asp-action="index">IntervencionTipo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paciente" asp-action="index">Paciente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PacienteIntervencion" asp-action="index">PacienteIntervencion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PacienteSintoma" asp-action="index">PacienteSintoma</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PacienteTratamiento" asp-action="index">PacienteTratamiento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Secretarium" asp-action="index">Secretarium</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sintoma" asp-action="index">Sintoma</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SintomaIntervencion" asp-action="index">SintomaIntervencion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoIntervencion" asp-action="index">TipoIntervencion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoTratamiento" asp-action="index">TipoTratamiento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tratamiento" asp-action="index">Tratamiento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TratamientoIntervencion" asp-action="index">TratamientoIntervencion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TratamientoTipo" asp-action="index">TratamientoTipo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Unidad" asp-action="index">Unidad</a>
-                        </li>
-                    </ul>
+
+    <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </div>
+
+
+    <div class="side-bar">
+
+        <header>
+
+            <div class="close-btn">
+
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="container-logo">
+                <img src="~/assets/img/logo/logo_gerald_def.jpg" alt="" />
+            </div>
+            <h3 class="titulonav text-center">Clinica GuanaHospi</h3>
+        </header>
+        <div class="menu">
+            <div class="item"><a asp-controller="Inicio" asp-action="Index"><i class="fas fa-desktop"></i>Inicio</a></div>
+
+            <div class="item">
+                <a class="sub-btn"> <i class="fas fa-user"> </i>Personas <i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a asp-controller="Doctor" asp-action="Index" class="sub-item"><i class="fa-solid fa-users-medical"></i>Doctores</a>
+                    <a asp-controller="Paciente" asp-action="Index" class="sub-item">Pacientes</a>
+                    <a asp-controller="Secretaria" asp-action="Index" class="sub-item">Secretarios</a>
                 </div>
             </div>
-        </nav>
-    </header>
+            <div class="item"> <a asp-controller="Unidad" asp-action="Index"><i class="fas fa-th"></i>Unidades</a></div>
+            <div class="item">
+                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>  Especialidades<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a asp-controller="Especialidad" asp-action="Index" class="sub-item"> Gestión de las especialidades</a>
+                    <a asp-controller="DoctorEspecialidad" asp-action="Index" class="sub-item">Doctores Especialidades</a>
+                </div>
+            </div>
+            <div class="item">
+                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Enfermedades<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a asp-controller="TipoEnfermedad" asp-action="Index" class="sub-item">Tipos de Enfermedades</a>
+                    <a asp-controller="Enfermedad" asp-action="Index" class="sub-item">Gestión de Enfermedades</a>
+                    <a asp-controller="EnfermedadTipo" asp-action="Index" class="sub-item">Enfermedades y Tipos</a>
+                    <a asp-controller="EnfermedadPaciente" asp-action="Index" class="sub-item">Enfermedades y Pacientes</a>
+                    <a asp-controller="EnfermedadSintoma" asp-action="Index" class="sub-item">Enfermedades y Sintomas</a>
+                </div>
+            </div>
+            <div class="item"> <a asp-controller="Cita" asp-action="Index"><i class="fas fa-th"></i>Gestion de Citas</a></div>
+
+            <div class="item">
+                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Consultas<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a asp-controller="Unidad" asp-action="UnidadMasPacientes" class="sub-item">Unidad mas pacientes</a>
+                    @*<a asp-controller="DoctorEspecialidad" asp-action="Index" class="sub-item">Doctores Especialidades</a>*@
+                </div>
+            </div>
+            <div class="item"><a asp-controller="Auth" asp-action="CerrarSesion"><ion-icon name="log-out"></ion-icon> Cerrar Sesión</a></div>
+        </div>
+    </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - GuanaHospi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function () {
+                $(this).next('.sub-menu').slideToggle();
+                $(this).find('.dropdown').toggleClass('rotate');
+            });
+
+            //jquery for expand and collapse the sidebar
+            $('.menu-btn').click(function () {
+                $('.side-bar').addClass('active');
+                $('.menu-btn').css("visibility", "hidden");
+            });
+
+            $('.close-btn').click(function () {
+                $('.side-bar').removeClass('active');
+                $('.menu-btn').css("visibility", "visible");
+            });
+        });
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 </html>
+

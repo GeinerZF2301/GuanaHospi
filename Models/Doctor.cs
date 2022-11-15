@@ -13,7 +13,7 @@ namespace GuanaHospi.Models
     {
         public Doctor()
         {
-            Citas = new HashSet<Cita>();
+            Cita = new HashSet<Cita>();
             DoctorEspecialidads = new HashSet<DoctorEspecialidad>();
             DoctorTratamientos = new HashSet<DoctorTratamiento>();
             Intervencions = new HashSet<Intervencion>();
@@ -46,8 +46,8 @@ namespace GuanaHospi.Models
         [Column("Fecha_Contratacion", TypeName = "date")]
         public DateTime FechaContratacion { get; set; }
 
-        [InverseProperty(nameof(Cita.IdDoctorNavigation))]
-        public virtual ICollection<Cita> Citas { get; set; }
+        [InverseProperty(nameof(Models.Cita.IdDoctorNavigation))]
+        public virtual ICollection<Cita> Cita { get; set; }
         [InverseProperty(nameof(DoctorEspecialidad.IdDoctorNavigation))]
         public virtual ICollection<DoctorEspecialidad> DoctorEspecialidads { get; set; }
         [InverseProperty(nameof(DoctorTratamiento.IdDoctorNavigation))]

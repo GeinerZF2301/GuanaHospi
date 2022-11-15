@@ -11,22 +11,28 @@
     <h4>Unidad</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Planta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Planta)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+        <dt class="col-sm-2">
+            Nombre del Doctor
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdDoctorNavigation.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            Primer Apellido
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdDoctorNavigation.Apellido1)
         </dd>
     </dl>

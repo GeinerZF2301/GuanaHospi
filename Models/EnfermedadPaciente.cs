@@ -15,8 +15,10 @@ namespace GuanaHospi.Models
         [Column("Id_EnfermedadPaciente")]
         public int IdEnfermedadPaciente { get; set; }
         [Column("Id_Enfermedad")]
+        [Display(Name = "Enfermedad")]
         public int? IdEnfermedad { get; set; }
         [Column("Id_Paciente")]
+        [Display(Name = "Identificacion del Paciente")]
         public int? IdPaciente { get; set; }
 
         [ForeignKey(nameof(IdEnfermedad))]

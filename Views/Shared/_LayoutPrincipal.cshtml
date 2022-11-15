@@ -46,7 +46,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a asp-controller="Inicio" asp-action="Index"><img src="assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -55,23 +55,19 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="index.html">Hola</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="services.html">Services</a></li>
-                                            <li>
-                                                <a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
+
+                                            <li><a asp-controller="Home" asp-action="Index">Administración</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-15">
-                                    <a href="#" class="btn header-btn">Make an Appointment</a>
+                                    <a class="btn header-btn" asp-controller="Auth" asp-action="Login">Iniciar Sesión</a>
+                                </div>
+                                <div class="header-right-btn f-right d-none d-lg-block ml-15">
+                                    <a href="#" class="btn header-btn">Registrarse</a>
                                 </div>
                             </div>
                         </div>
@@ -386,6 +382,11 @@
         </section>
         <!-- About Law End-->
     </main>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
     <footer>
         <div class="footer-wrappr section-bg3" data-background="assets/img/gallery/footer-bg.png">
             <div class="footer-area footer-padding ">
@@ -408,7 +409,7 @@
                                                         <li><a href="about.html">About</a></li>
                                                         <li><a href="services.html">Services</a></li>
                                                         <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="contact.html">Contact</a></li>
+                                                        <li><a href="contact.html">Administracion</a></li>
                                                     </ul>
                                                 </nav>
                                             </div>
@@ -431,7 +432,7 @@
                                 <!-- Form -->
                                 <div class="footer-form">
                                     <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
+                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="">
                                             <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email'">
                                             <div class="form-icon">
                                                 <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
@@ -452,15 +453,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-
-
-
             <!-- footer-bottom area -->
             <div class="footer-bottom-area">
                 <div class="container">

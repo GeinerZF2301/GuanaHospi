@@ -13,7 +13,7 @@ namespace GuanaHospi.Models
     {
         public Paciente()
         {
-            Citas = new HashSet<Cita>();
+            Cita = new HashSet<Cita>();
             EnfermedadPacientes = new HashSet<EnfermedadPaciente>();
             PacienteIntervencions = new HashSet<PacienteIntervencion>();
             PacienteSintomas = new HashSet<PacienteSintoma>();
@@ -50,8 +50,8 @@ namespace GuanaHospi.Models
         [ForeignKey(nameof(IdUnidad))]
         [InverseProperty(nameof(Unidad.Pacientes))]
         public virtual Unidad IdUnidadNavigation { get; set; }
-        [InverseProperty(nameof(Cita.IdPacienteNavigation))]
-        public virtual ICollection<Cita> Citas { get; set; }
+        [InverseProperty(nameof(Models.Cita.IdPacienteNavigation))]
+        public virtual ICollection<Cita> Cita { get; set; }
         [InverseProperty(nameof(EnfermedadPaciente.IdPacienteNavigation))]
         public virtual ICollection<EnfermedadPaciente> EnfermedadPacientes { get; set; }
         [InverseProperty(nameof(PacienteIntervencion.IdPacienteNavigation))]

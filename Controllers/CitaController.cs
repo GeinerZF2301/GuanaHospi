@@ -51,9 +51,9 @@ namespace GuanaHospi.Controllers
         // GET: Cita/Create
         public IActionResult Create()
         {
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1");
-            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Apellido1");
-            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Apellido1");
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor","Cedula");
+            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Cedula");
+            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Cedula");
             return View();
         }
 
@@ -81,9 +81,9 @@ namespace GuanaHospi.Controllers
                 conn.Close();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", cita.IdDoctor);
-            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Apellido1", cita.IdPaciente);
-            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Apellido1", cita.IdSecretaria);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", cita.IdDoctor);
+            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Cedula", cita.IdPaciente);
+            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Cedula", cita.IdSecretaria);
             return View(cita);
         }
 
@@ -100,9 +100,9 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", cita.IdDoctor);
-            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Apellido1", cita.IdPaciente);
-            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Apellido1", cita.IdSecretaria);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", cita.IdDoctor);
+            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Cedula", cita.IdPaciente);
+            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Cedula", cita.IdSecretaria);
             return View(cita);
         }
 
@@ -150,9 +150,9 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", cita.IdDoctor);
-            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Apellido1", cita.IdPaciente);
-            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Apellido1", cita.IdSecretaria);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", cita.IdDoctor);
+            ViewData["IdPaciente"] = new SelectList(_context.Pacientes, "IdPaciente", "Cedula", cita.IdPaciente);
+            ViewData["IdSecretaria"] = new SelectList(_context.Secretaria, "IdSecretaria", "Cedula", cita.IdSecretaria);
             return View(cita);
         }
 

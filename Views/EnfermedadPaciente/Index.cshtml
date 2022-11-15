@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GuanaHospi.Models.EnfermedadPaciente>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Enfermedad que Padece
+            </th>
+            <th>
+                Nombre del Paciente
+            </th>
+            <th>
+                Primer Apellido
+            </th>
+            <th>
+                Segundo Apellido
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEnfermedadNavigation.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Apellido1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Apellido2)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEnfermedadPaciente">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEnfermedadPaciente">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEnfermedadPaciente">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
