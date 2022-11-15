@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuanaHospi.Controllers
 {
@@ -49,7 +50,7 @@ namespace GuanaHospi.Controllers
         // GET: IntervencionTipo/Create
         public IActionResult Create()
         {
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion");
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion");
             ViewData["IdTipoIntervencion"] = new SelectList(_context.TipoIntervenciones, "IdTipoIntervencion", "NombreTipo");
             return View();
         }
@@ -63,11 +64,20 @@ namespace GuanaHospi.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(intervencionTipo);
-                await _context.SaveChangesAsync();
+                //_context.Add(intervencionTipo);
+                //await _context.SaveChangesAsync();
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                SqlCommand cmd = conn.CreateCommand();
+                conn.Open();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "SP_InsertarIntervencionTipo";
+                cmd.Parameters.Add("@Id_Intervencion", System.Data.SqlDbType.Int).Value = intervencionTipo.IdTipoIntervencion;
+                cmd.Parameters.Add("@Id_TipoIntervencion", System.Data.SqlDbType.Int).Value = intervencionTipo.IdIntervencion;
+                await cmd.ExecuteNonQueryAsync();
+                conn.Close();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion", intervencionTipo.IdIntervencion);
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion", intervencionTipo.IdIntervencion);
             ViewData["IdTipoIntervencion"] = new SelectList(_context.TipoIntervenciones, "IdTipoIntervencion", "NombreTipo", intervencionTipo.IdTipoIntervencion);
             return View(intervencionTipo);
         }
@@ -85,7 +95,7 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion", intervencionTipo.IdIntervencion);
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion", intervencionTipo.IdIntervencion);
             ViewData["IdTipoIntervencion"] = new SelectList(_context.TipoIntervenciones, "IdTipoIntervencion", "NombreTipo", intervencionTipo.IdTipoIntervencion);
             return View(intervencionTipo);
         }
@@ -106,8 +116,18 @@ namespace GuanaHospi.Controllers
             {
                 try
                 {
-                    _context.Update(intervencionTipo);
-                    await _context.SaveChangesAsync();
+                    SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                    SqlCommand cmd = conn.CreateCommand();
+                    conn.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_Actualizar_IntervencionTipo";
+                    cmd.Parameters.Add("@Id_IntervencionTipo", System.Data.SqlDbType.Int).Value = intervencionTipo.IdIntervencionTipo;
+                    cmd.Parameters.Add("@Id_Intervencion", System.Data.SqlDbType.Int).Value = intervencionTipo.IdTipoIntervencion;
+                    cmd.Parameters.Add("@Id_TipoIntervencion", System.Data.SqlDbType.Int).Value = intervencionTipo.IdIntervencion;
+                    await cmd.ExecuteNonQueryAsync();
+                    conn.Close();
+                    //_context.Update(intervencionTipo);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,7 +142,7 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdIntervencion"] = new SelectList(_context.Intervencions, "IdIntervencion", "Descripcion", intervencionTipo.IdIntervencion);
+            ViewData["IdIntervencion"] = new SelectList(_context.Intervenciones, "IdIntervencion", "Descripcion", intervencionTipo.IdIntervencion);
             ViewData["IdTipoIntervencion"] = new SelectList(_context.TipoIntervenciones, "IdTipoIntervencion", "NombreTipo", intervencionTipo.IdTipoIntervencion);
             return View(intervencionTipo);
         }
@@ -152,9 +172,17 @@ namespace GuanaHospi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var intervencionTipo = await _context.IntervencionTipos.FindAsync(id);
-            _context.IntervencionTipos.Remove(intervencionTipo);
-            await _context.SaveChangesAsync();
+            //var intervencionTipo = await _context.IntervencionTipos.FindAsync(id);
+            //_context.IntervencionTipos.Remove(intervencionTipo);
+            //await _context.SaveChangesAsync();
+            SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+            SqlCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "SP_EliminarIntervencionTipo";
+            cmd.Parameters.Add("@Id_IntervencionTipo", System.Data.SqlDbType.Int).Value = id;
+            await cmd.ExecuteNonQueryAsync();
+            conn.Close();
             return RedirectToAction(nameof(Index));
         }
 

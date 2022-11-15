@@ -22,7 +22,7 @@ namespace GuanaHospi.Controllers
         // GET: Intervencion
         public async Task<IActionResult> Index()
         {
-            var guanaHospiContext = _context.Intervencions.Include(i => i.IdDoctorNavigation);
+            var guanaHospiContext = _context.Intervenciones.Include(i => i.IdDoctorNavigation);
             return View(await guanaHospiContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace GuanaHospi.Controllers
                 return NotFound();
             }
 
-            var intervencion = await _context.Intervencions
+            var intervencion = await _context.Intervenciones
                 .Include(i => i.IdDoctorNavigation)
                 .FirstOrDefaultAsync(m => m.IdIntervencion == id);
             if (intervencion == null)
@@ -77,7 +77,7 @@ namespace GuanaHospi.Controllers
                 return NotFound();
             }
 
-            var intervencion = await _context.Intervencions.FindAsync(id);
+            var intervencion = await _context.Intervenciones.FindAsync(id);
             if (intervencion == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace GuanaHospi.Controllers
                 return NotFound();
             }
 
-            var intervencion = await _context.Intervencions
+            var intervencion = await _context.Intervenciones
                 .Include(i => i.IdDoctorNavigation)
                 .FirstOrDefaultAsync(m => m.IdIntervencion == id);
             if (intervencion == null)
@@ -146,15 +146,15 @@ namespace GuanaHospi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var intervencion = await _context.Intervencions.FindAsync(id);
-            _context.Intervencions.Remove(intervencion);
+            var intervencion = await _context.Intervenciones.FindAsync(id);
+            _context.Intervenciones.Remove(intervencion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool IntervencionExists(int id)
         {
-            return _context.Intervencions.Any(e => e.IdIntervencion == id);
+            return _context.Intervenciones.Any(e => e.IdIntervencion == id);
         }
     }
 }

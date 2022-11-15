@@ -22,7 +22,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdDoctorNavigation)
             </th>
-            <th></th>
+            <th>
+                Apellido 1
+            </th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +36,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Planta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Apellido1)

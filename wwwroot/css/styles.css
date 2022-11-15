@@ -1,0 +1,27 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+.linea {
+    border-top: 1px solid black;
+    height: 2px;
+    max-width: 200px;
+    padding: 0;
+    margin: 20px auto 0 auto;
+}
+
+.container{
+    margin-top:30px !important;
+}
+
+container-table{
+    margin-left:20px;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 2.5rem;
+    padding-bottom: 13px;
+    font-family: Poppins;
+    letter-spacing: 2px;
+}

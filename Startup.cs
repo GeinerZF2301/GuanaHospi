@@ -58,7 +58,8 @@ namespace GuanaHospi
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
+            
             app.UseRouting();
 
             app.UseAuthentication();
@@ -68,9 +69,11 @@ namespace GuanaHospi
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Inicio}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa");
         }
     }
 }

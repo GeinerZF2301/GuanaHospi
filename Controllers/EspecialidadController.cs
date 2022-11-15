@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
-
+using Microsoft.Data.SqlClient;
 namespace GuanaHospi.Controllers
 {
     public class EspecialidadController : Controller
@@ -58,8 +58,17 @@ namespace GuanaHospi.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(especialidad);
-                await _context.SaveChangesAsync();
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                SqlCommand cmd = conn.CreateCommand();
+                conn.Open();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "SP_InsertarEspecialidad";
+                cmd.Parameters.Add("@Nombre", System.Data.SqlDbType.VarChar, 30).Value = especialidad.Nombre;
+                cmd.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar, 40).Value = especialidad.Descripcion;
+                await cmd.ExecuteNonQueryAsync();
+                conn.Close();
+                //_context.Add(especialidad);
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(especialidad);
@@ -97,8 +106,18 @@ namespace GuanaHospi.Controllers
             {
                 try
                 {
-                    _context.Update(especialidad);
-                    await _context.SaveChangesAsync();
+                    SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                    SqlCommand cmd = conn.CreateCommand();
+                    conn.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_Actualizar_Especialidad";
+                    cmd.Parameters.Add("@Id_Especialidad", System.Data.SqlDbType.Int).Value = especialidad.IdEspecialidad;
+                    cmd.Parameters.Add("@Nombre", System.Data.SqlDbType.VarChar, 30).Value = especialidad.Nombre;
+                    cmd.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar, 40).Value = especialidad.Descripcion;
+                    await cmd.ExecuteNonQueryAsync();
+                    conn.Close();
+                    //_context.Update(especialidad);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -139,9 +158,17 @@ namespace GuanaHospi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var especialidad = await _context.Especialidades.FindAsync(id);
-            _context.Especialidades.Remove(especialidad);
-            await _context.SaveChangesAsync();
+            SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+            SqlCommand cmd = conn.CreateCommand();
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "SP_EliminarEspecialidad";
+            cmd.Parameters.Add("@Id_Especialidad", System.Data.SqlDbType.Int).Value = id;
+            await cmd.ExecuteNonQueryAsync();
+            conn.Close();
+            //var especialidad = await _context.Especialidades.FindAsync(id);
+            //_context.Especialidades.Remove(especialidad);
+            //await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

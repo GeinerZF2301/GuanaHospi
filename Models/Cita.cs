@@ -28,10 +28,10 @@ namespace GuanaHospi.Models
         public int? IdSecretaria { get; set; }
 
         [ForeignKey(nameof(IdDoctor))]
-        [InverseProperty(nameof(Doctor.Citas))]
+        [InverseProperty(nameof(Doctor.Cita))]
         public virtual Doctor IdDoctorNavigation { get; set; }
         [ForeignKey(nameof(IdPaciente))]
-        [InverseProperty(nameof(Paciente.Citas))]
+        [InverseProperty(nameof(Paciente.Cita))]
         public virtual Paciente IdPacienteNavigation { get; set; }
         [ForeignKey(nameof(IdSecretaria))]
         [InverseProperty(nameof(Secretaria.Citas))]

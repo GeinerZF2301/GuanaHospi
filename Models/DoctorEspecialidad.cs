@@ -14,8 +14,10 @@ namespace GuanaHospi.Models
         [Key]
         [Column("Id_DoctorEspecialidad")]
         public int IdDoctorEspecialidad { get; set; }
+        [Display(Name = "Especialidad")]
         [Column("Id_Especialidad")]
         public int? IdEspecialidad { get; set; }
+        [Display(Name = "Cedula del Doctor")]
         [Column("Id_Doctor")]
         public int? IdDoctor { get; set; }
 

@@ -7,12 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
+using GuanaHospi.Models.ViewModels;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace GuanaHospi.Controllers
 {
     public class UnidadController : Controller
     {
+        List<UnidadMasPacientes> listaunidadmaspacientes = new List<UnidadMasPacientes>();
+        SqlDataAdapter adapter;
         private readonly GuanaHospiContext _context;
 
         public UnidadController(GuanaHospiContext context)
@@ -27,6 +31,45 @@ namespace GuanaHospi.Controllers
             return View(await guanaHospiContext.ToListAsync());
         }
 
+        public List<UnidadMasPacientes> ListarUnidadMasPacientes()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_UnidadesMasPacientes", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            UnidadMasPacientes unidad = new UnidadMasPacientes();
+                            unidad.IdUnidad = Int32.Parse(datatable.Rows[i][0].ToString());
+                            unidad.NombreUnidad = datatable.Rows[i][1].ToString();
+                            unidad.CantidadPacientes = Int32.Parse(datatable.Rows[i][2].ToString());
+                            listaunidadmaspacientes.Add(unidad);
+                        }
+                    }
+                conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaunidadmaspacientes;
+        }
+        public IActionResult UnidadMasPacientes()
+        {
+            return View(ListarUnidadMasPacientes());
+        }
         // GET: Unidad/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,7 +92,7 @@ namespace GuanaHospi.Controllers
         // GET: Unidad/Create
         public IActionResult Create()
         {
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1");
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula");
             return View();
         }
 
@@ -75,7 +118,7 @@ namespace GuanaHospi.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", unidad.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", unidad.IdDoctor);
             return View(unidad);
         }
 
@@ -92,7 +135,7 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", unidad.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", unidad.IdDoctor);
             return View(unidad);
         }
 
@@ -137,7 +180,7 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", unidad.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", unidad.IdDoctor);
             return View(unidad);
         }
 

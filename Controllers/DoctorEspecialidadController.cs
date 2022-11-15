@@ -49,8 +49,8 @@ namespace GuanaHospi.Controllers
         // GET: DoctorEspecialidad/Create
         public IActionResult Create()
         {
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1");
-            ViewData["IdEspecialidad"] = new SelectList(_context.Especialidades, "IdEspecialidad", "Descripcion");
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula");
+            ViewData["IdEspecialidad"] = new SelectList(_context.Especialidades, "IdEspecialidad", "Nombre");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace GuanaHospi.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", doctorEspecialidad.IdDoctor);
-            ViewData["IdEspecialidad"] = new SelectList(_context.Especialidades, "IdEspecialidad", "Descripcion", doctorEspecialidad.IdEspecialidad);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", doctorEspecialidad.IdDoctor);
+            ViewData["IdEspecialidad"] = new SelectList(_context.Especialidades, "IdEspecialidad", "Nombre", doctorEspecialidad.IdEspecialidad);
             return View(doctorEspecialidad);
         }
 
@@ -85,8 +85,8 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", doctorEspecialidad.IdDoctor);
-            ViewData["IdEspecialidad"] = new SelectList(_context.Especialidades, "IdEspecialidad", "Descripcion", doctorEspecialidad.IdEspecialidad);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", doctorEspecialidad.IdDoctor);
+            ViewData["IdEspecialidad"] = new SelectList(_context.Especialidades, "IdEspecialidad", "Nombre", doctorEspecialidad.IdEspecialidad);
             return View(doctorEspecialidad);
         }
 

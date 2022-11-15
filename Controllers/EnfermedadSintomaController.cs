@@ -50,7 +50,7 @@ namespace GuanaHospi.Controllers
         // GET: EnfermedadSintoma/Create
         public IActionResult Create()
         {
-            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedads, "IdEnfermedad", "Descripcion");
+            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedades, "IdEnfermedad", "Descripcion");
             ViewData["IdSintoma"] = new SelectList(_context.Sintomas, "IdSintoma", "Descripcion");
             return View();
         }
@@ -77,7 +77,7 @@ namespace GuanaHospi.Controllers
                 //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedads, "IdEnfermedad", "Descripcion", enfermedadSintoma.IdEnfermedad);
+            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedades, "IdEnfermedad", "Descripcion", enfermedadSintoma.IdEnfermedad);
             ViewData["IdSintoma"] = new SelectList(_context.Sintomas, "IdSintoma", "Descripcion", enfermedadSintoma.IdSintoma);
             return View(enfermedadSintoma);
         }
@@ -95,7 +95,7 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedads, "IdEnfermedad", "Descripcion", enfermedadSintoma.IdEnfermedad);
+            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedades, "IdEnfermedad", "Descripcion", enfermedadSintoma.IdEnfermedad);
             ViewData["IdSintoma"] = new SelectList(_context.Sintomas, "IdSintoma", "Descripcion", enfermedadSintoma.IdSintoma);
             return View(enfermedadSintoma);
         }
@@ -140,7 +140,7 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedads, "IdEnfermedad", "Descripcion", enfermedadSintoma.IdEnfermedad);
+            ViewData["IdEnfermedad"] = new SelectList(_context.Enfermedades, "IdEnfermedad", "Descripcion", enfermedadSintoma.IdEnfermedad);
             ViewData["IdSintoma"] = new SelectList(_context.Sintomas, "IdSintoma", "Descripcion", enfermedadSintoma.IdSintoma);
             return View(enfermedadSintoma);
         }

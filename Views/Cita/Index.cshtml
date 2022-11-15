@@ -23,13 +23,13 @@
                 @Html.DisplayNameFor(model => model.Observaciones)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+                Identificacion del Doctor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdPacienteNavigation)
+                Identificacion del Paciente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdSecretariaNavigation)
+                Cita Registrada Por el Secretario
             </th>
             <th></th>
         </tr>
@@ -47,13 +47,13 @@
                 @Html.DisplayFor(modelItem => item.Observaciones)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Apellido1)
+                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Cedula)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Apellido1)
+                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Cedula)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdSecretariaNavigation.Apellido1)
+                @Html.DisplayFor(modelItem => item.IdSecretariaNavigation.Cedula)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCita">Edit</a> |

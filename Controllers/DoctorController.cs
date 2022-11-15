@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using GuanaHospi.Data;
@@ -13,17 +14,63 @@ namespace GuanaHospi.Controllers
 {
     public class DoctorController : Controller
     {
+        List<Doctor> listadoctores = new List<Doctor>();
+        SqlDataAdapter adapter;
         private readonly GuanaHospiContext _context;
-
         public DoctorController(GuanaHospiContext context)
         {
             _context = context;
         }
 
-        // GET: Doctor
-        public async Task<IActionResult> Index()
+
+        public List<Doctor> ListarDoctores()
         {
-            return View(await _context.Doctors.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("SP_ListarDoctor", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Doctor doctor = new Doctor();
+                            doctor.IdDoctor = Int32.Parse(datatable.Rows[i][0].ToString());
+                            doctor.Cedula = datatable.Rows[i][1].ToString();
+                            doctor.Nombre = datatable.Rows[i][2].ToString();
+                            doctor.Apellido1 = datatable.Rows[i][3].ToString();
+                            doctor.Apellido2 = datatable.Rows[i][4].ToString();
+                            doctor.FechaNacimiento = DateTime.Parse(datatable.Rows[i][5].ToString());
+                            doctor.Email = datatable.Rows[i][6].ToString();
+                            doctor.Salario = datatable.Rows[i][7].ToString();
+                            doctor.FechaContratacion = DateTime.Parse(datatable.Rows[i][8].ToString());
+                            listadoctores.Add(doctor);
+                        }
+                    }
+                    conn.Close();
+
+                }
+
+            }catch(Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listadoctores;
+        }
+
+        // GET: Doctor
+        public IActionResult Index()
+        {
+            //return View(await _context.Doctors.ToListAsync());
+            return View(ListarDoctores());
         }
 
         // GET: Doctor/Details/5
