@@ -75,7 +75,9 @@
                     <a asp-controller="Tratamiento" asp-action="Index" class="sub-item">Tratamientos</a>
                     <a asp-controller="TratamientoTipo" asp-action="Index" class="sub-item">Tratamientos y sus tipos</a>
                     <a asp-controller="DoctorTratamiento" asp-action="Index" class="sub-item">Doctores y tratamientos</a>
+                    <a asp-controller="PacienteTratamiento" asp-action="Index" class="sub-item">Paciente y tratamientos</a>
                 </div>
+
             </div>
             <div class="item">
                 <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Intervenciones<i class="fas fa-angle-right dropdown"></i></a>
@@ -88,9 +90,9 @@
             <div class="item">
                 <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Sintomas<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
-                    <a asp-controller="Sintoma" asp-action="Index" class="sub-item">Tipos de Intervenciones</a>
-                    <a asp-controller="SintomaIntervencion" asp-action="Index" class="sub-item">Intervenciones</a>
-                
+                    <a asp-controller="Sintoma" asp-action="Index" class="sub-item">Gestion de sintomas</a>
+                    <a asp-controller="SintomaIntervencion" asp-action="Index" class="sub-item">Sintomas en las intervenciones</a>
+
                 </div>
             </div>
             <div class="item">
@@ -101,6 +103,7 @@
                     <a asp-controller="Intervencion" asp-action="MayorIntervencion" class="sub-item">Mayor Intervenciones</a>
                 </div>
             </div>
+            <div class="item"> <a asp-controller="Cita" asp-action="ConsHistorico"><i class="fas fa-th"></i>Historial</a></div>
             <div class="item"><a asp-controller="Auth" asp-action="CerrarSesion"><ion-icon name="log-out"></ion-icon> Cerrar Sesión</a></div>
         </div>
     </div>
