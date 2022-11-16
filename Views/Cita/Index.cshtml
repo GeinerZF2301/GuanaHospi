@@ -8,9 +8,10 @@
 <h1>Index</h1>
 @if (User.IsInRole("Administrador") || User.IsInRole("Secretario"))
 {
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+<p>
+    <a asp-action="Create">Create New</a>
+    <a asp-action="PDF">Generar PDF</a>
+</p>
 }
     <table class="table">
         <thead>

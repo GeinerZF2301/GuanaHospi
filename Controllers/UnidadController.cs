@@ -10,6 +10,7 @@ using GuanaHospi.Models;
 using GuanaHospi.Models.ViewModels;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Rotativa.AspNetCore;
 
 namespace GuanaHospi.Controllers
 {
@@ -29,6 +30,13 @@ namespace GuanaHospi.Controllers
         {
             var guanaHospiContext = _context.Unidades.Include(u => u.IdDoctorNavigation);
             return View(await guanaHospiContext.ToListAsync());
+        }
+        public async Task<IActionResult> PDF()
+        {
+            return new ViewAsPdf(await _context.Unidades.Include(u => u.IdDoctorNavigation).ToListAsync())
+            {
+                FileName = "Unidad.pdf"
+            };
         }
 
         public List<UnidadMasPacientes> ListarUnidadMasPacientes()

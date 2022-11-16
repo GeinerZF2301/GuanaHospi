@@ -1,0 +1,61 @@
+﻿@model IEnumerable<GuanaHospi.Models.Cita>
+
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+}
+
+<h1>Lista de Pacientes</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaSalida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th>
+                Identificacion del Doctor
+            </th>
+            <th>
+                Identificacion del Paciente
+            </th>
+            <th>
+                Cita Registrada Por el Secretario
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaIngreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaSalida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observaciones)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdSecretariaNavigation.Cedula)
+                </td>
+              
+            </tr>
+        }
+    </tbody>
+</table>
