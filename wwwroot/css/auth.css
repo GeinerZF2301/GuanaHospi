@@ -1,24 +1,33 @@
-﻿/*Estilos para el login*/
-
-.container{
+﻿.container{
     max-width:540px;
     margin-top:100px;
+
 }
 
-body,
+
 html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #3587A4 !important;
+   
 }
-
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("inicio.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    justify-content: center;
+}
 .user_card {
     height: 550px;
     width: 500px;
     margin-top: 0px;
     margin-bottom: auto;
-    background: #C1DFF0;
+    background: #ffffff;
     position: relative;
     display: flex;
     justify-content: center;
@@ -31,22 +40,25 @@ html {
     box-shadow: 10px
 }
 
+
+
 .brand_logo_container {
     position: absolute;
     height: 170px;
     width: 170px;
     top: -75px;
     border-radius: 50%;
-    background: #60a3bc;
+    background: #ffff;
     padding: 10px;
     text-align: center;
+    border: 2px solid #2D848A;
 }
 
 .brand_logo {
     height: 150px;
-    width: 150px;
+    width: 170px;
     border-radius: 50%;
-    border: 2px solid white;
+ 
 }
 
 .form_container {
@@ -61,6 +73,7 @@ html {
     margin-top:20px;
     font-size:18px;
     font-weight:700;
+    border-radius: 1rem;
 }
 
     .login_btn:focus {
@@ -81,15 +94,21 @@ html {
 
 .input_user{
     height:50px;
+    border-radius: 0.50rem;
+    margin: 1rem;
 }
+
+
 .input_pass {
     box-shadow: none !important;
     outline: 0px !important;
     padding-bottom: 5px;
     height: 50px;
+    border-radius: 0.50rem;
+    margin: 1rem;
+
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #c0392b !important;
+    background-color: #c0392b !important;
 }
-/*------------------------------------------------------------------------------------------*/
