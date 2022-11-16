@@ -8,17 +8,69 @@ using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
 using Microsoft.Data.SqlClient;
+using GuanaHospi.Models.ViewModels;
+using System.Data;
 
 namespace GuanaHospi.Controllers
 {
     public class CitaController : Controller
     {
+        List<Historico> listaHistorico = new List<Historico>();
+        SqlDataAdapter adapter;
+
         private readonly GuanaHospiContext _context;
 
         public CitaController(GuanaHospiContext context)
         {
             _context = context;
         }
+
+
+        //Historial
+        public List<Historico> ListarHistorico()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_Historial", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Historico NiAl = new Historico();
+                            NiAl.Fecha = datatable.Rows[i][0].ToString();
+                            NiAl.descripcion = datatable.Rows[i][1].ToString();
+                            listaHistorico.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaHistorico;
+        }
+
+        public IActionResult ConsHistorico()
+        {
+            return View(ListarHistorico());
+        }
+
+
+
 
         // GET: Cita
         public async Task<IActionResult> Index()

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GuanaHospi.Models.ViewModels.Historico>
+@{
+    ViewData["Title"] = "ConsHistorico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Historial</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Actividad
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
