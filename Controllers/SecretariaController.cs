@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
 using Microsoft.Data.SqlClient;
+using Rotativa.AspNetCore;
 
 namespace GuanaHospi.Controllers
 {
@@ -24,6 +25,15 @@ namespace GuanaHospi.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Secretaria.ToListAsync());
+        }
+
+
+        public async Task<IActionResult> PDF()
+        {
+            return new ViewAsPdf(await _context.Secretaria.ToListAsync())
+            {
+                FileName = "Secretaria.pdf"
+            };
         }
 
         // GET: Secretaria/Details/5
