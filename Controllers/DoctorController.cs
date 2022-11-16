@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 
 namespace GuanaHospi.Controllers
 {
@@ -71,6 +72,14 @@ namespace GuanaHospi.Controllers
         {
             //return View(await _context.Doctors.ToListAsync());
             return View(ListarDoctores());
+        }
+
+        public IActionResult PDF()
+        {
+            return new ViewAsPdf(ListarDoctores())
+            {
+                FileName = "Doctor.pdf"
+            };
         }
 
         // GET: Doctor/Details/5
