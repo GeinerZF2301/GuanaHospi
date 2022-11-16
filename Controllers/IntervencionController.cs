@@ -15,6 +15,7 @@ namespace GuanaHospi.Controllers
     public class IntervencionController : Controller
     {
         List<MayorIntervencionDoctor> listaintervencion = new List<MayorIntervencionDoctor>();
+        List<DetalleIntervencion> listadetalle = new List<DetalleIntervencion>();
         SqlDataAdapter adapter;
         private readonly GuanaHospiContext _context;
 
@@ -67,6 +68,46 @@ namespace GuanaHospi.Controllers
             return listaintervencion;
         }
 
+        public List<DetalleIntervencion> ListarDetalleIntervenciones()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_DetallesIntervencion", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            DetalleIntervencion detalleintervencion = new DetalleIntervencion();
+                            detalleintervencion.NombreIntervencion = datatable.Rows[i][0].ToString();
+                            detalleintervencion.Descripcion = datatable.Rows[i][0].ToString();
+                            detalleintervencion.MasFrecuente = Int32.Parse(datatable.Rows[i][2].ToString());
+                            listadetalle.Add(detalleintervencion);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listadetalle;
+        }
+
+        public IActionResult DetalleIntervencion()
+        {
+            return View(ListarDetalleIntervenciones());
+        }
         public IActionResult MayorIntervencion()
         {
             return View(ListarMayorIntervenciones());

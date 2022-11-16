@@ -21,7 +21,9 @@ namespace GuanaHospi.Models
 
         [ForeignKey(nameof(IdIntervencion))]
         [InverseProperty(nameof(Intervencion.SintomaIntervencions))]
+        [Display(Name = "Intervencion")]
         public virtual Intervencion IdIntervencionNavigation { get; set; }
+        [Display(Name = "Sintoma")]
         [ForeignKey(nameof(IdSintoma))]
         [InverseProperty(nameof(Sintoma.SintomaIntervencions))]
         public virtual Sintoma IdSintomaNavigation { get; set; }

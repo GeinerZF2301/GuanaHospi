@@ -38,72 +38,97 @@
         
         <div class="menu">
             <div class="item"><a asp-controller="Inicio" asp-action="Index"><i class="fas fa-desktop"></i>Inicio</a></div>
-            @if (User.IsInRole("Administrador"))
+            @if (User.IsInRole("Administrador") || User.IsInRole("Secretario"))
+
             {
                 <div class="item">
                     <a class="sub-btn"> <i class="fas fa-user"> </i>Personas <i class="fas fa-angle-right dropdown"></i></a>
                     <div class="sub-menu">
                         <a asp-controller="Doctor" asp-action="Index" class="sub-item"><i class="fa-solid fa-users-medical"></i>Doctores</a>
                         <a asp-controller="Paciente" asp-action="Index" class="sub-item">Pacientes</a>
-                        <a asp-controller="Secretaria" asp-action="Index" class="sub-item">Secretarios</a>
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-controller="Secretaria" asp-action="Index" class="sub-item">Secretarios</a>
+                        }
                     </div>
                 </div>
             }
-            <div class="item"> <a asp-controller="Unidad" asp-action="Index"><i class="fas fa-th"></i>Unidades</a></div>
-            <div class="item">
-                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>  Especialidades<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a asp-controller="Especialidad" asp-action="Index" class="sub-item"> Gestión de las especialidades</a>
-                    <a asp-controller="DoctorEspecialidad" asp-action="Index" class="sub-item">Doctores Especialidades</a>
+            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
+            {
+                <div class="item"> <a asp-controller="Unidad" asp-action="Index"><i class="fas fa-th"></i>Unidades</a></div>
+                <div class="item">
+                    <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>  Especialidades<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a asp-controller="Especialidad" asp-action="Index" class="sub-item"> Gestión de las especialidades</a>
+                        <a asp-controller="DoctorEspecialidad" asp-action="Index" class="sub-item">Doctores Especialidades</a>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Enfermedades<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a asp-controller="TipoEnfermedad" asp-action="Index" class="sub-item">Tipos de Enfermedades</a>
-                    <a asp-controller="Enfermedad" asp-action="Index" class="sub-item">Gestión de Enfermedades</a>
-                    <a asp-controller="EnfermedadTipo" asp-action="Index" class="sub-item">Enfermedades y Tipos</a>
-                    <a asp-controller="EnfermedadPaciente" asp-action="Index" class="sub-item">Enfermedades y Pacientes</a>
-                    <a asp-controller="EnfermedadSintoma" asp-action="Index" class="sub-item">Enfermedades y Sintomas</a>
+            }
+            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
+            {
+                <div class="item">
+                    <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Enfermedades<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a asp-controller="TipoEnfermedad" asp-action="Index" class="sub-item">Tipos de Enfermedades</a>
+                        <a asp-controller="Enfermedad" asp-action="Index" class="sub-item">Gestión de Enfermedades</a>
+                        <a asp-controller="EnfermedadTipo" asp-action="Index" class="sub-item">Enfermedades y Tipos</a>
+                        <a asp-controller="EnfermedadPaciente" asp-action="Index" class="sub-item">Enfermedades y Pacientes</a>
+                        <a asp-controller="EnfermedadSintoma" asp-action="Index" class="sub-item">Enfermedades y Sintomas</a>
+                    </div>
                 </div>
-            </div>
+            }
             <div class="item"> <a asp-controller="Cita" asp-action="Index"><i class="fas fa-th"></i>Gestion de Citas</a></div>
-            <div class="item">
-                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Tratamientos<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a asp-controller="TipoTratamiento" asp-action="Index" class="sub-item">Tipos de Tratamientos</a>
-                    <a asp-controller="Tratamiento" asp-action="Index" class="sub-item">Tratamientos</a>
-                    <a asp-controller="TratamientoTipo" asp-action="Index" class="sub-item">Tratamientos y sus tipos</a>
-                    <a asp-controller="DoctorTratamiento" asp-action="Index" class="sub-item">Doctores y tratamientos</a>
-                    <a asp-controller="PacienteTratamiento" asp-action="Index" class="sub-item">Paciente y tratamientos</a>
-                </div>
-
-            </div>
-            <div class="item">
-                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Intervenciones<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a asp-controller="TipoIntervencion" asp-action="Index" class="sub-item">Tipos de Intervenciones</a>
-                    <a asp-controller="Intervencion" asp-action="Index" class="sub-item">Intervenciones</a>
-                    <a asp-controller="IntervencionTipo" asp-action="Index" class="sub-item">Intervenciones y sus tipos</a>
-                </div>
-            </div>
-            <div class="item">
-                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Sintomas<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a asp-controller="Sintoma" asp-action="Index" class="sub-item">Gestion de sintomas</a>
-                    <a asp-controller="SintomaIntervencion" asp-action="Index" class="sub-item">Sintomas en las intervenciones</a>
+            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
+            {
+                <div class="item">
+                    <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Tratamientos<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a asp-controller="TipoTratamiento" asp-action="Index" class="sub-item">Tipos de Tratamientos</a>
+                        <a asp-controller="Tratamiento" asp-action="Index" class="sub-item">Tratamientos</a>
+                        <a asp-controller="TratamientoTipo" asp-action="Index" class="sub-item">Tratamientos y sus tipos</a>
+                        <a asp-controller="DoctorTratamiento" asp-action="Index" class="sub-item">Doctores y tratamientos</a>
+                        <a asp-controller="PacienteTratamiento" asp-action="Index" class="sub-item">Paciente y tratamientos</a>
+                    </div>
 
                 </div>
-            </div>
-            <div class="item">
-                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Consultas<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a asp-controller="Unidad" asp-action="UnidadMasPacientes" class="sub-item">Unidad mas pacientes</a>
-                    <a asp-controller="Enfermedad" asp-action="TopEnfermedades" class="sub-item">Top de Enfermedades</a>
-                    <a asp-controller="Intervencion" asp-action="MayorIntervencion" class="sub-item">Mayor Intervenciones</a>
+            }
+            @if (User.IsInRole("Administrador"))
+            {
+                <div class="item">
+                    <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Intervenciones<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a asp-controller="TipoIntervencion" asp-action="Index" class="sub-item">Tipos de Intervenciones</a>
+                        <a asp-controller="Intervencion" asp-action="Index" class="sub-item">Intervenciones</a>
+                        <a asp-controller="IntervencionTipo" asp-action="Index" class="sub-item">Intervenciones y sus tipos</a>
+                    </div>
                 </div>
-            </div>
-            <div class="item"> <a asp-controller="Cita" asp-action="ConsHistorico"><i class="fas fa-th"></i>Historial</a></div>
+            }
+            @if (User.IsInRole("Administrador"))
+            {
+                <div class="item">
+                    <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Sintomas<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a asp-controller="Sintoma" asp-action="Index" class="sub-item">Gestion de sintomas</a>
+                        <a asp-controller="SintomaIntervencion" asp-action="Index" class="sub-item">Sintomas en las intervenciones</a>
+                    </div>
+                </div>
+            }
+            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
+            {
+                <div class="item">
+                    <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Consultas<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a asp-controller="Unidad" asp-action="UnidadMasPacientes" class="sub-item">Unidad mas pacientes</a>
+                        <a asp-controller="Enfermedad" asp-action="TopEnfermedades" class="sub-item">Top de Enfermedades</a>
+                        <a asp-controller="Intervencion" asp-action="MayorIntervencion" class="sub-item">Mayor Intervenciones</a>
+                        <a asp-controller="Intervencion" asp-action="DetalleIntervencion" class="sub-item">Detalle Intervenciones</a>
+                    </div>
+                </div>
+            }
+            @if (User.IsInRole("Administrador"))
+            {
+                <div class="item"> <a asp-controller="Cita" asp-action="ConsHistorico"><i class="fas fa-th"></i>Historial</a></div>
+            }
             <div class="item"><a asp-controller="Auth" asp-action="CerrarSesion"><ion-icon name="log-out"></ion-icon> Cerrar Sesión</a></div>
         </div>
     </div>
