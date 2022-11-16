@@ -1,18 +1,17 @@
 ﻿@model IEnumerable<GuanaHospi.Models.Unidad>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Lista de Unidades</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-    <a asp-action="PDF">Generar PDF</a>
-</p>
+
 <table class="table">
     <thead>
+        <tr>
+            <
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -21,16 +20,14 @@
                 @Html.DisplayNameFor(model => model.Planta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+                Identificacion del Doctor
             </th>
-            <th>
-                Apellido 1
-            </th>
-            <th>Acciones</th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -44,12 +41,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Apellido1)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUnidad">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUnidad">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUnidad">Delete</a>
-            </td>
+
         </tr>
-}
+        }
     </tbody>
 </table>

@@ -7,11 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
-
+using GuanaHospi.Models.ViewModels;
+using Microsoft.Data.SqlClient;
+using System.Data;
 namespace GuanaHospi.Controllers
 {
     public class IntervencionController : Controller
     {
+        List<MayorIntervencionDoctor> listaintervencion = new List<MayorIntervencionDoctor>();
+        List<DetalleIntervencion> listadetalle = new List<DetalleIntervencion>();
+        SqlDataAdapter adapter;
         private readonly GuanaHospiContext _context;
 
         public IntervencionController(GuanaHospiContext context)
@@ -24,6 +29,88 @@ namespace GuanaHospi.Controllers
         {
             var guanaHospiContext = _context.Intervenciones.Include(i => i.IdDoctorNavigation);
             return View(await guanaHospiContext.ToListAsync());
+        }
+
+
+        public List<MayorIntervencionDoctor> ListarMayorIntervenciones()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_MayorIntervencionesDoctor", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            MayorIntervencionDoctor intervencion = new MayorIntervencionDoctor();
+                            intervencion.Id = Int32.Parse(datatable.Rows[i][0].ToString());
+                            intervencion.NombreDoctor = datatable.Rows[i][1].ToString();
+                            intervencion.CantidadIntervencion = Int32.Parse(datatable.Rows[i][2].ToString());
+                            listaintervencion.Add(intervencion);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaintervencion;
+        }
+
+        public List<DetalleIntervencion> ListarDetalleIntervenciones()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_DetallesIntervencion", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            DetalleIntervencion detalleintervencion = new DetalleIntervencion();
+                            detalleintervencion.NombreIntervencion = datatable.Rows[i][0].ToString();
+                            detalleintervencion.Descripcion = datatable.Rows[i][0].ToString();
+                            detalleintervencion.MasFrecuente = Int32.Parse(datatable.Rows[i][2].ToString());
+                            listadetalle.Add(detalleintervencion);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listadetalle;
+        }
+
+        public IActionResult DetalleIntervencion()
+        {
+            return View(ListarDetalleIntervenciones());
+        }
+        public IActionResult MayorIntervencion()
+        {
+            return View(ListarMayorIntervenciones());
         }
 
         // GET: Intervencion/Details/5
@@ -48,7 +135,7 @@ namespace GuanaHospi.Controllers
         // GET: Intervencion/Create
         public IActionResult Create()
         {
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1");
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula");
             return View();
         }
 
@@ -65,7 +152,7 @@ namespace GuanaHospi.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", intervencion.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", intervencion.IdDoctor);
             return View(intervencion);
         }
 
@@ -82,7 +169,7 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", intervencion.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", intervencion.IdDoctor);
             return View(intervencion);
         }
 
@@ -118,7 +205,7 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", intervencion.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", intervencion.IdDoctor);
             return View(intervencion);
         }
 

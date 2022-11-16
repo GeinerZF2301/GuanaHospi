@@ -7,16 +7,63 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GuanaHospi.Data;
 using GuanaHospi.Models;
+using GuanaHospi.Models.ViewModels;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace GuanaHospi.Controllers
 {
     public class EnfermedadController : Controller
     {
+        List<TopEnfermedades> listatop = new List<TopEnfermedades>();
+        SqlDataAdapter adapter;
         private readonly GuanaHospiContext _context;
 
         public EnfermedadController(GuanaHospiContext context)
         {
             _context = context;
+        }
+
+
+        public List<TopEnfermedades> ListarTopEnfermedades()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_TopEnfermedadesAtendidas", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            TopEnfermedades top = new TopEnfermedades();
+                            
+                            top.NombreEnfermedad = datatable.Rows[i][0].ToString();
+                            top.Sintoma = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listatop.Add(top);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listatop;
+        }
+
+        public IActionResult TopEnfermedades()
+        {
+            return View(ListarTopEnfermedades());
         }
 
         // GET: Enfermedad

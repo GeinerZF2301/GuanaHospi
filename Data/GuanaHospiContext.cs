@@ -43,7 +43,7 @@ namespace GuanaHospi.Data
         public virtual DbSet<TratamientoIntervencion> TratamientoIntervenciones { get; set; }
         public virtual DbSet<TratamientoTipo> TratamientoTipos { get; set; }
         public virtual DbSet<Unidad> Unidades { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        
 
       
     }

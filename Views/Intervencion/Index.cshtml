@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Hora)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+                Identificación del Doctor
             </th>
             <th></th>
         </tr>
@@ -47,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Hora)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Apellido1)
+                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Cedula)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdIntervencion">Edit</a> |

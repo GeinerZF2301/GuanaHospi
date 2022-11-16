@@ -6,61 +6,77 @@
 }
 
 <h1>Index</h1>
-
+@if (User.IsInRole("Administrador") || User.IsInRole("Secretario"))
+{
 <p>
     <a asp-action="Create">Create New</a>
+    <a asp-action="PDF">Generar PDF</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaIngreso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaSalida)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observaciones)
-            </th>
-            <th>
-                Identificacion del Doctor
-            </th>
-            <th>
-                Identificacion del Paciente
-            </th>
-            <th>
-                Cita Registrada Por el Secretario
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaSalida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observaciones)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Cedula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Cedula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdSecretariaNavigation.Cedula)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCita">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCita">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCita">Delete</a>
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaIngreso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaSalida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Observaciones)
+                </th>
+                <th>
+                    Identificacion del Doctor
+                </th>
+                <th>
+                    Identificacion del Paciente
+                </th>
+                <th>
+                    Cita Registrada Por el Secretario
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaIngreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaSalida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observaciones)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDoctorNavigation.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPacienteNavigation.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdSecretariaNavigation.Cedula)
+                </td>
+               
+                <td>
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Secretario"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdCita">Edit</a>
+                    }
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Secretario") || User.IsInRole("Doctor"))
+                    {
+                        <a asp-action="Details" asp-route-id="@item.IdCita">Details</a>
+                    }
+
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Secretario"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.IdCita">Delete</a>
+                    }
+                </td>
+                
+            </tr>
+            }
+        </tbody>
+    </table>

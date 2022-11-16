@@ -14,11 +14,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdPaciente" class="control-label"></label>
+                <label class="control-label">Cedula del Paciente</label>
                 <select asp-for="IdPaciente" class ="form-control" asp-items="ViewBag.IdPaciente"></select>
             </div>
             <div class="form-group">
-                <label asp-for="IdTratamiento" class="control-label"></label>
+                <label class="control-label">Nombre del Tratamiento</label>
                 <select asp-for="IdTratamiento" class ="form-control" asp-items="ViewBag.IdTratamiento"></select>
             </div>
             <div class="form-group">

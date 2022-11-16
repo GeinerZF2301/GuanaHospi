@@ -19,9 +19,11 @@ namespace GuanaHospi.Models
         [Column("Id_Enfermedad")]
         public int? IdEnfermedad { get; set; }
 
+        [Display(Name ="Enfermedad")]
         [ForeignKey(nameof(IdEnfermedad))]
         [InverseProperty(nameof(Enfermedad.EnfermedadTipos))]
         public virtual Enfermedad IdEnfermedadNavigation { get; set; }
+        [Display(Name = "Tipo de Enfermedad")]
         [ForeignKey(nameof(IdTipoEnfermedad))]
         [InverseProperty(nameof(TipoEnfermedad.EnfermedadTipos))]
         public virtual TipoEnfermedad IdTipoEnfermedadNavigation { get; set; }

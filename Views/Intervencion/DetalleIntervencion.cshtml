@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GuanaHospi.Models.ViewModels.DetalleIntervencion>
+@{
+    ViewData["Title"] = "Detalles de la Intervencion ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="py-2 pb-1">Detalles de las intervenciones</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreIntervencion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MasFrecuente)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreIntervencion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MasFrecuente)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-controller="Home">Regresar al Inicio</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
