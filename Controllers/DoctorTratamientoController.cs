@@ -50,8 +50,8 @@ namespace GuanaHospi.Controllers
         // GET: DoctorTratamiento/Create
         public IActionResult Create()
         {
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1");
-            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion");
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula");
+            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Nombre");
             return View();
         }
 
@@ -75,8 +75,8 @@ namespace GuanaHospi.Controllers
                 conn.Close();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", doctorTratamiento.IdDoctor);
-            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion", doctorTratamiento.IdTratamiento);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", doctorTratamiento.IdDoctor);
+            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Nombre", doctorTratamiento.IdTratamiento);
             return View(doctorTratamiento);
         }
 
@@ -93,8 +93,8 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", doctorTratamiento.IdDoctor);
-            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion", doctorTratamiento.IdTratamiento);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", doctorTratamiento.IdDoctor);
+            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Nombre", doctorTratamiento.IdTratamiento);
             return View(doctorTratamiento);
         }
 
@@ -138,8 +138,8 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", doctorTratamiento.IdDoctor);
-            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Descripcion", doctorTratamiento.IdTratamiento);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", doctorTratamiento.IdDoctor);
+            ViewData["IdTratamiento"] = new SelectList(_context.Tratamientos, "IdTratamiento", "Nombre", doctorTratamiento.IdTratamiento);
             return View(doctorTratamiento);
         }
 

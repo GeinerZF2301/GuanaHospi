@@ -11,35 +11,47 @@
     <h4>Intervencion</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaIntervencion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaIntervencion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Hora)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Hora)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+        <dt class="col-sm-2">
+            Nombre del Doctor
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdDoctorNavigation.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            Apellido 1
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdDoctorNavigation.Apellido1)
+        </dd>
+        <dt class="col-sm-2">
+            Apellido 2
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdDoctorNavigation.Apellido2)
         </dd>
     </dl>
 </div>

@@ -77,7 +77,7 @@
                     </div>
                 </div>
             }
-            <div class="item"> <a asp-controller="Cita" asp-action="Index"><i class="fas fa-th"></i>Gestion de Citas</a></div>
+            <div class="item"> <a asp-controller="Cita" asp-action="Index"><i class="fas fa-th"></i>Gestion de Atención</a></div>
             @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
             {
                 <div class="item">
@@ -92,7 +92,7 @@
 
                 </div>
             }
-            @if (User.IsInRole("Administrador"))
+            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
             {
                 <div class="item">
                     <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Intervenciones<i class="fas fa-angle-right dropdown"></i></a>

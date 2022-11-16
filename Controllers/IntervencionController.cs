@@ -135,7 +135,7 @@ namespace GuanaHospi.Controllers
         // GET: Intervencion/Create
         public IActionResult Create()
         {
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1");
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula");
             return View();
         }
 
@@ -152,7 +152,7 @@ namespace GuanaHospi.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", intervencion.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", intervencion.IdDoctor);
             return View(intervencion);
         }
 
@@ -169,7 +169,7 @@ namespace GuanaHospi.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", intervencion.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", intervencion.IdDoctor);
             return View(intervencion);
         }
 
@@ -205,7 +205,7 @@ namespace GuanaHospi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Apellido1", intervencion.IdDoctor);
+            ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", intervencion.IdDoctor);
             return View(intervencion);
         }
 
