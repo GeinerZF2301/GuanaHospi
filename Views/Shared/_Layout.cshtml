@@ -65,7 +65,22 @@
                 </div>
             </div>
             <div class="item"> <a asp-controller="Cita" asp-action="Index"><i class="fas fa-th"></i>Gestion de Citas</a></div>
-
+            <div class="item">
+                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Tratamientos<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a asp-controller="TipoTratamiento" asp-action="Index" class="sub-item">Tipos de Tratamientos</a>
+                    <a asp-controller="Tratamiento" asp-action="Index" class="sub-item">Tratamientos</a>
+                    <a asp-controller="TratamientoTipo" asp-action="Index" class="sub-item">Tratamientos y sus tipos</a>
+                </div>
+            </div>
+            <div class="item">
+                <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Intervenciones<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a asp-controller="TipoIntervencion" asp-action="Index" class="sub-item">Tipos de Intervenciones</a>
+                    <a asp-controller="Intervencion" asp-action="Index" class="sub-item">Intervenciones</a>
+                    <a asp-controller="IntervencionTipo" asp-action="Index" class="sub-item">Intervenciones y sus tipos</a>
+                </div>
+            </div>
             <div class="item">
                 <a class="sub-btn"> <ion-icon name="medkit"></ion-icon>Consultas<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">

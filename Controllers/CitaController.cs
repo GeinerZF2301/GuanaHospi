@@ -68,17 +68,21 @@ namespace GuanaHospi.Controllers
             {
                 SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
                 SqlCommand cmd = conn.CreateCommand();
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "SP_InsertarCita";
-                cmd.Parameters.Add("@FechaIngreso", System.Data.SqlDbType.Date).Value = cita.FechaIngreso;
-                cmd.Parameters.Add("@FechaSalida", System.Data.SqlDbType.Date).Value = cita.FechaSalida;
-                cmd.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar, 15).Value = cita.Observaciones;
-                cmd.Parameters.Add("@Id_Doctor", System.Data.SqlDbType.Int).Value = cita.IdDoctor;
-                cmd.Parameters.Add("@Id_Paciente", System.Data.SqlDbType.Int).Value = cita.IdPaciente;
-                cmd.Parameters.Add("@Id_Secretaria", System.Data.SqlDbType.Int).Value = cita.IdSecretaria;
-                await cmd.ExecuteNonQueryAsync();
-                conn.Close();
+
+                _context.Add(cita);
+                await _context.SaveChangesAsync();
+
+                //conn.Open();
+                //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.CommandText = "SP_InsertarCita";
+                //cmd.Parameters.Add("@FechaIngreso", System.Data.SqlDbType.Date).Value = cita.FechaIngreso;
+                //cmd.Parameters.Add("@FechaSalida", System.Data.SqlDbType.Date).Value = cita.FechaSalida;
+                //cmd.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar, 15).Value = cita.Observaciones;
+                //cmd.Parameters.Add("@Id_Doctor", System.Data.SqlDbType.Int).Value = cita.IdDoctor;
+                //cmd.Parameters.Add("@Id_Paciente", System.Data.SqlDbType.Int).Value = cita.IdPaciente;
+                //cmd.Parameters.Add("@Id_Secretaria", System.Data.SqlDbType.Int).Value = cita.IdSecretaria;
+                //await cmd.ExecuteNonQueryAsync();
+                //conn.Close();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdDoctor"] = new SelectList(_context.Doctors, "IdDoctor", "Cedula", cita.IdDoctor);
