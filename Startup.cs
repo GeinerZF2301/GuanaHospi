@@ -1,5 +1,6 @@
 
 using GuanaHospi.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,8 +36,15 @@ namespace GuanaHospi
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<GuanaHospiContext>();
             services.AddControllersWithViews();
-            
-                 
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(option =>
+            {
+                option.LoginPath = "/Auth/Login";
+                option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                option.AccessDeniedPath = "/Home/Privacy";
+            });
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddSession();
             services.AddMvc();

@@ -8,10 +8,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GuanaHospi.Controllers
 {
     //[ValidarSesion]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,6 +22,7 @@ namespace GuanaHospi.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Administrador,Secretario,Doctor")]
         public IActionResult Index()
         {
             return View();
